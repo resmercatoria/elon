@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Elon Musk Mastery Hub</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            overflow-x: hidden;
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="%23ffffff10" points="0,1000 1000,200 1000,1000"/></svg>') no-repeat center center;
+            background-size: cover;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 107, 107, 0.3);
+        }
+
+        .section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .content-section {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 2rem 0;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+
+        .mindset-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .mindset-card {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mindset-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            transition: all 0.5s ease;
+            transform: scale(0);
+        }
+
+        .mindset-card:hover::before {
+            transform: scale(1);
+        }
+
+        .mindset-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .mindset-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .mindset-card p {
+            position: relative;
+            z-index: 2;
+            opacity: 0.9;
+        }
+
+        .quote-section {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quote-carousel {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .quote {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .quote.active {
+            display: block;
+        }
+
+        .quote blockquote {
+            font-size: 2rem;
+            font-style: italic;
+            margin-bottom: 2rem;
+            line-height: 1.4;
+        }
+
+        .quote-author {
+            font-size: 1.2rem;
+            opacity: 0.8;
+        }
+
+        .quote-nav {
+            margin-top: 2rem;
+        }
+
+        .quote-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            border: none;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quote-dot.active {
+            background: white;
+            transform: scale(1.2);
+        }
+
+        .interactive-quiz {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            padding: 3rem;
+            border-radius: 20px;
+            color: white;
+            text-align: center;
+        }
+
+        .quiz-question {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .quiz-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .quiz-option {
+            background: rgba(255,255,255,0.2);
+            padding: 1rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .quiz-option:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-3px);
+        }
+
+        .quiz-option.selected {
+            border-color: white;
+            background: rgba(255,255,255,0.4);
+        }
+
+        .quiz-result {
+            display: none;
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-top: 2rem;
+        }
+
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+            z-index: 1000;
+            transition: width 0.1s ease;
+        }
+
+        .floating-nav {
+            position: fixed;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 100;
+        }
+
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            margin: 10px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-dot.active {
+            background: #ff6b6b;
+            transform: scale(1.5);
+        }
+
+        .strategy-timeline {
+            position: relative;
+            margin: 3rem 0;
+        }
+
+        .timeline-item {
+            background: white;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .animated-icon {
+            font-size: 3rem;
+            color: #667eea;
+            margin-bottom: 1rem;
+            animation: pulse 2s infinite;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .hero p { font-size: 1.1rem; }
+            .section { padding: 3rem 1rem; }
+            .content-section { padding: 2rem; }
+            .quote blockquote { font-size: 1.5rem; }
+            .floating-nav { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+    
+    <div class="floating-nav" id="floatingNav">
+        <div class="nav-dot active" data-section="0"></div>
+        <div class="nav-dot" data-section="1"></div>
+        <div class="nav-dot" data-section="2"></div>
+        <div class="nav-dot" data-section="3"></div>
+        <div class="nav-dot" data-section="4"></div>
+    </div>
+
+    <section class="hero" data-aos="fade-up">
+        <div class="hero-content">
+            <h1>The Elon Musk Mastery Hub</h1>
+            <p>Discover the mindsets, strategies, and leadership principles behind one of history's most transformative entrepreneurs</p>
+            <a href="#mindsets" class="cta-button">Start Your Journey</a>
+        </div>
+    </section>
+
+    <div class="section">
+        <div class="content-section" id="mindsets" data-aos="fade-up">
+            <h2 class="section-title">
+                <i class="fas fa-brain animated-icon"></i>
+                Core Mindsets That Changed Everything
+            </h2>
+            
+            <div class="mindset-grid">
+                <div class="mindset-card" data-aos="fade-right" data-aos-delay="100">
+                    <h3><i class="fas fa-atom"></i> First Principles Thinking</h3>
+                    <p>Strip away assumptions and build from fundamental truths. Question everything down to physics-level certainty.</p>
+                </div>
+                
+                <div class="mindset-card" data-aos="fade-up" data-aos-delay="200">
+                    <h3><i class="fas fa-rocket"></i> The Mars Test</h3>
+                    <p>Every decision filtered through: "Does this help humanity become multi-planetary?" Ultimate purpose drives clarity.</p>
+                </div>
+                
+                <div class="mindset-card" data-aos="fade-left" data-aos-delay="300">
+                    <h3><i class="fas fa-cogs"></i> Manufacturing Obsession</h3>
+                    <p>"The factory is the product." Production is 10x harder than prototyping—design for scale from day one.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="quote-section" data-aos="fade-up">
+            <div class="quote-carousel">
+                <div class="quote active">
+                    <blockquote>"When something is important enough, you do it even if the odds are not in your favor."</blockquote>
+                    <div class="quote-author">On taking calculated risks for breakthrough outcomes</div>
+                </div>
+                
+                <div class="quote">
+                    <blockquote>"I think it's very important to have a feedback loop, where you're constantly thinking about what you've done and how you could be doing it better."</blockquote>
+                    <div class="quote-author">On continuous improvement and rapid iteration</div>
+                </div>
+                
+                <div class="quote">
+                    <blockquote>"Physics is law, everything else is recommendation."</blockquote>
+                    <div class="quote-author">On distinguishing between fundamental constraints and arbitrary limitations</div>
+                </div>
+            </div>
+            
+            <div class="quote-nav">
+                <button class="quote-dot active" onclick="showQuote(0)"></button>
+                <button class="quote-dot" onclick="showQuote(1)"></button>
+                <button class="quote-dot" onclick="showQuote(2)"></button>
+            </div>
+        </div>
+
+        <div class="content-section" id="strategies" data-aos="fade-up">
+            <h2 class="section-title">
+                <i class="fas fa-chess animated-icon"></i>
+                Strategic Frameworks
+            </h2>
+            
+            <div class="strategy-timeline">
+                <div class="timeline-item" data-aos="fade-right">
+                    <h3><i class="fas fa-sync-alt"></i> The Iterative Improvement Engine</h3>
+                    <p><strong>Ship quickly → Gather feedback → Iterate rapidly → Repeat faster</strong></p>
+                    <p>Tesla releases over-the-air updates constantly, treating cars like smartphones that improve after purchase.</p>
+                </div>
+                
+                <div class="timeline-item" data-aos="fade-left">
+                    <h3><i class="fas fa-layer-group"></i> Vertical Integration Strategy</h3>
+                    <p><strong>Build in-house to control quality and innovation speed</strong></p>
+                    <p>SpaceX builds rockets, engines, and software. Tesla manufactures batteries, chips, and seats. You can't optimize what you don't control.</p>
+                </div>
+                
+                <div class="timeline-item" data-aos="fade-right">
+                    <h3><i class="fas fa-magnet"></i> Talent Magnetism Formula</h3>
+                    <p><strong>Mission significance + Technical challenges + Rapid advancement + Direct impact</strong></p>
+                    <p>Attract extraordinary talent by offering work that matters to humanity and pushes boundaries.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section" id="leadership" data-aos="fade-up">
+            <h2 class="section-title">
+                <i class="fas fa-crown animated-icon"></i>
+                Leadership Mastery
+            </h2>
+            
+            <div class="stats-container">
+                <div class="stat-card" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="stat-number">80-100</div>
+                    <div class="stat-label">Hours per week during critical phases</div>
+                </div>
+                
+                <div class="stat-card" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">Companies valued at $1B+ simultaneously</div>
+                </div>
+                
+                <div class="stat-card" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="stat-number">∞</div>
+                    <div class="stat-label">Impossible deadlines that force breakthroughs</div>
+                </div>
+            </div>
+            
+            <div class="mindset-grid">
+                <div class="mindset-card" data-aos="fade-up" data-aos-delay="100">
+                    <h3>Lead by Example</h3>
+                    <p>During Tesla's "production hell," Musk slept on the factory floor. You can't ask others to sacrifice what you won't sacrifice yourself.</p>
+                </div>
+                
+                <div class="mindset-card" data-aos="fade-up" data-aos-delay="200">
+                    <h3>Embrace Productive Conflict</h3>
+                    <p>Encourage teams to challenge you directly. Better to be wrong quickly than right slowly.</p>
+                </div>
+                
+                <div class="mindset-card" data-aos="fade-up" data-aos-delay="300">
+                    <h3>Set Impossible Deadlines</h3>
+                    <p>Tight constraints force creative problem-solving and eliminate non-essential work.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="interactive-quiz" data-aos="fade-up">
+            <h2><i class="fas fa-question-circle"></i> Which Musk Strategy Fits Your Challenge?</h2>
+            <div id="quiz-container">
+                <div class="quiz-question">What's your biggest current challenge?</div>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="selectOption(this, 'complexity')">
+                        <i class="fas fa-puzzle-piece"></i><br>
+                        Too much complexity slowing progress
+                    </div>
+                    <div class="quiz-option" onclick="selectOption(this, 'innovation')">
+                        <i class="fas fa-lightbulb"></i><br>
+                        Need breakthrough innovation
+                    </div>
+                    <div class="quiz-option" onclick="selectOption(this, 'team')">
+                        <i class="fas fa-users"></i><br>
+                        Team lacking motivation/direction
+                    </div>
+                    <div class="quiz-option" onclick="selectOption(this, 'competition')">
+                        <i class="fas fa-trophy"></i><br>
+                        Intense competition/market pressure
+                    </div>
+                </div>
+                
+                <div class="quiz-result" id="quiz-result">
+                    <h3 id="result-title"></h3>
+                    <p id="result-content"></p>
+                    <button class="cta-button" onclick="resetQuiz()">Try Another Challenge</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section" id="apply" data-aos="fade-up">
+            <h2 class="section-title">
+                <i class="fas fa-rocket animated-icon"></i>
+                Apply Musk's Methods Today
+            </h2>
+            
+            <div class="mindset-grid">
+                <div class="mindset-card" data-aos="fade-right">
+                    <h3>For Entrepreneurs</h3>
+                    <p>Choose problems worth solving → Build for scale from day one → Iterate faster than competitors → Recruit true believers</p>
+                </div>
+                
+                <div class="mindset-card" data-aos="fade-up">
+                    <h3>For Leaders</h3>
+                    <p>Lead from the front → Question everything → Set unreasonable deadlines → Encourage productive conflict</p>
+                </div>
+                
+                <div class="mindset-card" data-aos="fade-left">
+                    <h3>For Individuals</h3>
+                    <p>Learn voraciously → Think in first principles → Take calculated risks → Focus on fundamentals</p>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 3rem;">
+                <p style="font-size: 1.3rem; font-style: italic; color: #667eea;">
+                    "Most limitations are self-imposed. Most impossibilities are temporary. Most breakthroughs come from refusing to accept 'that's just how things are.'"
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+
+        // Progress bar
+        window.addEventListener('scroll', () => {
+            const scrollProgress = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+            document.getElementById('progressBar').style.width = scrollProgress + '%';
+        });
+
+        // Floating navigation
+        const sections = document.querySelectorAll('.content-section, .hero');
+        const navDots = document.querySelectorAll('.nav-dot');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach((section, index) => {
+                const sectionTop = section.getBoundingClientRect().top;
+                const sectionHeight = section.offsetHeight;
+                if (sectionTop <= 100 && sectionTop + sectionHeight > 100) {
+                    current = index;
+                }
+            });
+
+            navDots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === current);
+            });
+        });
+
+        // Navigation click handlers
+        navDots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                sections[index].scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // Quote carousel
+        let currentQuote = 0;
+        const quotes = document.querySelectorAll('.quote');
+        const quoteDots = document.querySelectorAll('.quote-dot');
+
+        function showQuote(index) {
+            quotes.forEach(quote => quote.classList.remove('active'));
+            quoteDots.forEach(dot => dot.classList.remove('active'));
+            
+            quotes[index].classList.add('active');
+            quoteDots[index].classList.add('active');
+            currentQuote = index;
+        }
+
+        // Auto-rotate quotes
+        setInterval(() => {
+            currentQuote = (currentQuote + 1) % quotes.length;
+            showQuote(currentQuote);
+        }, 5000);
+
+        // Interactive quiz
+        const quizResults = {
+            complexity: {
+                title: "Apply the Simplification Obsession",
+                content: "Musk's approach: Question every requirement → Delete unnecessary steps → Simplify or optimize → Accelerate cycle time → Automate. Start by asking 'Who made this rule?' for every process that slows you down."
+            },
+            innovation: {
+                title: "Use First Principles Thinking",
+                content: "Break your challenge down to fundamental truths. Strip away all assumptions and inherited practices. Ask 'What do we know to be absolutely true?' then build solutions from basic components up."
+            },
+            team: {
+                title: "Implement the Talent Magnetism Formula",
+                content: "Offer your team: Mission significance (work that matters) + Technical challenges (problems that push boundaries) + Rapid advancement (learn faster) + Direct impact (see results). Purpose beats money every time."
+            },
+            competition: {
+                title: "Deploy the Iterative Improvement Engine",
+                content: "Ship quickly → Gather feedback → Iterate rapidly → Repeat faster than competitors. Speed of learning beats perfection. Your advantage is how fast you can adapt and improve."
+            }
+        };
+
+        function selectOption(element, type) {
+            // Remove previous selections
+            document.querySelectorAll('.quiz-option').forEach(opt => opt.classList.remove('selected'));
+            
+            // Select current option
+            element.classList.add('selected');
+            
+            // Show result
+            setTimeout(() => {
+                const result = quizResults[type];
+                document.getElementById('result-title').textContent = result.title;
+                document.getElementById('result-content').textContent = result.content;
+                document.getElementById('quiz-result').style.display = 'block';
+                
+                // Scroll to result
+                document.getElementById('quiz-result').scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 500);
+        }
+
+        function resetQuiz() {
+            document.querySelectorAll('.quiz-option').forEach(opt => opt.classList.remove('selected'));
+            document.getElementById('quiz-result').style.display = 'none';
+            document.getElementById('quiz-container').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Smooth scrolling for CTA button
+        document.querySelector('.cta-button').addEventListener('click', (e) => {
+            e.preventDefault();
+            document.getElementById('mindsets').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        // Add some interactive hover effects
+        document.querySelectorAll('.mindset-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-10px) rotateX(5deg)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0) rotateX(0)';
+            });
+        });
+
+        // Parallax effect for hero section
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelector('.hero');
+            const speed = scrolled * 0.5;
+            parallax.style.transform = `translateY(${speed}px)`;
+        });
+    </script>
+</body>
+</html>
